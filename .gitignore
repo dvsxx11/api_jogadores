@@ -5,3 +5,15 @@
 *.ipr
 out/
 
+# Compilação e Build (Maven)
+target/
+
+# Configurações de Ambiente Local (Credenciais Sensíveis)
+application-local.properties
+application-dev.properties
+application-prod.properties
+.env
+
+# Logs e Ficheiros Temporários
+*.log
+*.tmp
