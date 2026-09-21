@@ -1,0 +1,22 @@
+# Sistema operacional (macOS)
+.DS_Store
+**/.DS_Store
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+out/
+
+# Backend (Java / Spring)
+target/
+application-local.properties
+application-dev.properties
+
+# Frontend (Node / Vue / Vite)
+**/node_modules/
+**/dist/
+**/.vite/
+*.log
