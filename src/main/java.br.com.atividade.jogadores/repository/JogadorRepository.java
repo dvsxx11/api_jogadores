@@ -1,44 +1,43 @@
 package br.com.atividade.jogadores.repository;
 
 import br.com.atividade.jogadores.model.Jogador;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static java.util.spi.ToolProvider.findFirst;
 
 @Repository
 public class JogadorRepository {
 
-    private final List<Jogador> jogadores = new ArrayList<>();
+    private final JdbcTemplate jdbcTemplate;
 
-    public JogadorRepository() {
-        jogadores.add(new Jogador(
-                1L, "Depay", "Atacante", 32, 32, 12, true));
+    private static final RowMapper<Jogador> MAPEADOR = (rs, linha) ->
+            new Jogador(
+                    rs.getLong("id"),
+                    rs.getString("nome"),
+                    rs.getString("posicao"),
+                    rs.getInt("idade"),
+                    rs.getInt("quantidade_gols"),
+                    rs.getInt("quantidade_partidas"),
+                    rs.getBoolean("ativo")
+            );
 
-        jogadores.add(new Jogador(
-                2L, "Garro", "Meio-campista", 28, 3, 15, true));
-
-        jogadores.add(new Jogador(
-                3L, "Gabriel Paulista", "Zagueiro", 35, 1, 18, false));
-
-        jogadores.add(new Jogador(
-                4L, "Hugo Souza", "Goleiro", 27, 0, 0, true));
-
-        jogadores.add(new Jogador(
-                5L, "Yuri Alberto", "Atacante", 25, 60, 3, false));
-
+    public JogadorRepository(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     public List<Jogador> listarTodos() {
-        return new ArrayList<>(jogadores);
+        String sql = "SELECT * FROM jogador ORDER BY id";
+        return jdbcTemplate.query(sql, MAPEADOR);
     }
 
     public Optional<Jogador> buscarPorId(Long id) {
-        return jogadores.stream()
-                .filter(jogador-> jogador.getId().equals(id))
+        String sql = "SELECT * FROM jogador WHERE id = ?";
+
+        return jdbcTemplate.query(sql, MAPEADOR, id)
+                .stream()
                 .findFirst();
     }
 }
