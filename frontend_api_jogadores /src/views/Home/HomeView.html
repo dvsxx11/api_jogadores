@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>Lista de Jogadores</h1>
+  <hr style="margin: 15px 0" />
+
+  <p v-if="mensagemErro" class="erro">{{ mensagemErro }}</p>
+  <p v-else-if="jogadores.length === 0">Nenhum jogador cadastrado.</p>
+
+  <div v-else class="tabela-container">
+    <table class="tabela">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nome</th>
+          <th>Posição</th>
+          <th>Clube</th>
+          <th>Idade</th>
+          <th>Gols</th>
+          <th>Partidas</th>
+          <th>Ativo</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="jogador in jogadores" :key="jogador.id">
+          <td>{{ jogador.id }}</td>
+          <td>{{ jogador.nome }}</td>
+          <td>{{ jogador.posicao }}</td>
+          <td>{{ jogador.clube }}</td>
+          <td>{{ jogador.idade }}</td>
+          <td>{{ jogador.quantidadeGols }}</td>
+          <td>{{ jogador.quantidadePartidas }}</td>
+          <td>
+            <span
+              :class="['status-badge', jogador.ativo ? 'status-ativo' : 'status-inativo']"
+            >
+              {{ jogador.ativo ? 'Ativo' : 'Inativo' }}
+            </span>
+          </td>
+          <td>
+            <div class="acoes-botoes">
+              <RouterLink :to="`/editar/${jogador.id}`" class="btn btn-primary"
+                >Editar</RouterLink
+              >
+              <button @click="apagarJogador(jogador.id)" class="btn btn-danger">
+                Apagar
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

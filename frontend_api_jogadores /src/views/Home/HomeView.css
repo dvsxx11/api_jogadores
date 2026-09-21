@@ -1,0 +1,69 @@
+.tabela-container {
+  overflow-x: auto;
+}
+
+.tabela {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.tabela th {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 14px 12px;
+  border-bottom: 2px solid #e2e8f0;
+  text-align: left;
+}
+
+.tabela td {
+  padding: 12px;
+  border-bottom: 1px solid #edf2f7;
+  color: #334155;
+  font-size: 14px;
+  vertical-align: middle;
+  text-align: left;
+}
+
+.tabela tbody tr:hover {
+  background-color: #f8fafc;
+  transition: background-color 0.15s ease;
+}
+
+.acoes-botoes {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+/* Badges de Status */
+.status-badge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 50px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.status-ativo {
+  background-color: #e6f7ef;
+  color: #16a34a;
+}
+
+.status-inativo {
+  background-color: #fef2f2;
+  color: #dc2626;
+}
+
+.erro {
+  color: #ef4444;
+  font-weight: 500;
+  margin-top: 10px;
+}

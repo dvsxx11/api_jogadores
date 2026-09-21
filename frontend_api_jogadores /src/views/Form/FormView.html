@@ -1,0 +1,53 @@
+<div class="container">
+  <h1>{{ idEdicao ? 'Editar Jogador' : 'Novo Jogador' }}</h1>
+  <hr style="margin: 15px 0" />
+
+  <form @submit.prevent="salvarJogador">
+    <div class="campo">
+      <label>Nome:</label>
+      <input type="text" v-model="jogador.nome" required />
+    </div>
+
+    <div class="campo">
+      <label>Posição:</label>
+      <input type="text" v-model="jogador.posicao" required />
+    </div>
+
+    <div class="campo">
+      <label>Clube:</label>
+      <input type="text" v-model="jogador.clube" />
+    </div>
+
+    <div class="campo-grupo">
+      <div class="campo">
+        <label>Idade:</label>
+        <input type="number" v-model.number="jogador.idade" min="0" required />
+      </div>
+
+      <div class="campo">
+        <label>Gols:</label>
+        <input type="number" v-model.number="jogador.quantidadeGols" min="0" />
+      </div>
+
+      <div class="campo">
+        <label>Partidas:</label>
+        <input
+          type="number"
+          v-model.number="jogador.quantidadePartidas"
+          min="0"
+        />
+      </div>
+    </div>
+
+    <div class="campo-checkbox">
+      <label>
+        <input type="checkbox" v-model="jogador.ativo" /> Jogador Ativo
+      </label>
+    </div>
+
+    <div class="acoes">
+      <button type="submit" class="btn btn-primary">Salvar</button>
+      <RouterLink to="/" class="btn btn-secondary">Cancelar</RouterLink>
+    </div>
+  </form>
+</div>
