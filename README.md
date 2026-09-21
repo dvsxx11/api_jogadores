@@ -1,97 +1,146 @@
-# API de Jogadores
+# ⚽ Aplicação de Gestão e API de Jogadores
 
-API REST simples para consulta de jogadores de futebol, desenvolvida com Java, Spring Boot, Maven e Spring Web.
+Aplicação Fullstack para cadastro, consulta e análise de desempenho de jogadores de futebol, desenvolvida com **Java (Spring Boot)** no Backend e **Vue.js (Vite)** no Frontend.
 
-Os jogadores são armazenados no PostgreSQL usando Spring JDBC.
+Os dados dos jogadores são armazenados no banco de dados **PostgreSQL** através do Spring JDBC.
 
-## Funcionalidades
+---
 
-- Cadastrar e editar jogadores, incluindo clube;
-- Listar todos os jogadores;
-- buscar jogador pelo ID;
-- listar jogadores ativos;
-- consultar o desempenho de um jogador;
-- retornar `404 Not Found` quando o jogador não existe.
+## 🚀 Tecnologias Utilizadas
 
-## Regras de negócio
+### Backend
 
-Um jogador está apto para ser titular quando está ativo e possui pelo menos cinco partidas.
+- **Java 17+**
+- **Spring Boot** (Spring Web, Spring JDBC)
+- **Maven**
+- **PostgreSQL**
 
-A classificação considera a média de gols por partida:
+### Frontend
 
-- média maior ou igual a `0,5`: Excelente;
-- média maior ou igual a `0,2`: Bom;
-- média menor que `0,2`: Regular;
-- nenhuma partida: Sem partidas suficientes.
+- **Vue.js 3**
+- **Vite**
+- **Vue Router**
+- **Axios**
 
-## Estrutura
+---
+
+## 📌 Funcionalidades
+
+- **Gerenciamento Completo:** Cadastrar e editar jogadores (incluindo nome, posição, clube, idade, partidas, gols e status);
+- **Interface Visual:** Interface web reativa em Vue.js para navegação e preenchimento de formulários;
+- **Consultas de Dados:** Listagem de todos os jogadores e filtragem de jogadores ativos;
+- **Análise de Desempenho:** Cálculo automático de médias de gols e status do jogador;
+- **Tratamento de Erros:** Validações de entrada (`400 Bad Request`) e tratamento para registros inexistentes (`404 Not Found`).
+
+---
+
+## ⚙️ Regras de Negócio
+
+Um jogador está **apto para ser titular** quando está **ativo** e possui pelo menos **5 partidas**.
+
+A classificação de desempenho considera a média de gols por partida ($\text{Média} = \frac{\text{Gols}}{\text{Partidas}}$):
+
+- **Média $\ge 0,5$:** Excelente
+- **Média $\ge 0,2$:** Bom
+- **Média $< 0,2$:** Regular
+- **Nenhuma partida:** Sem partidas suficientes
+
+---
+
+## 📁 Estrutura do Projeto
 
 ```text
-controller
-└── JogadorController.java
-
-model
-└── Jogador.java
-
-repository
-└── JogadorRepository.java
-
-service
-├── JogadorService.java
-└── DesempenhoService.java
+api_jogadores/
+├── frontend_api_jogadores/          # Projeto Frontend (Vue.js + Vite)
+│   ├── src/
+│   │   ├── services/                # Integração com a API (Axios)
+│   │   ├── views/                   # Telas da aplicação (Home, Form)
+│   │   ├── router/                  # Rotas do Vue Router
+│   │   └── styles/                  # Estilos globais em CSS
+│   ├── package.json
+│   └── vite.config.js
+│
+├── src/                             # Projeto Backend (Java + Spring Boot)
+│   └── main/
+│       ├── java/br/com/atividade/jogadores/
+│       │   ├── controller/          # Endpoints REST
+│       │   ├── model/               # Entidades e DTOs
+│       │   ├── repository/          # Acesso ao banco (Spring JDBC)
+│       │   └── service/             # Regras de negócio e desempenho
+│       └── resources/               # Configurações (application.properties)
+│
+├── sql/                             # Scripts de banco de dados
+│   └── adicionar_clube.sql
+│
+├── .gitignore
+└── pom.xml                          # Dependências Maven do Backend
 ```
 
-## Endpoints
+---
 
-| Método | Endpoint | Descrição |
-|---|---|---|
-| POST | `/jogadores` | Cadastra um jogador (`201`) |
-| PUT | `/jogadores/{id}` | Atualiza um jogador (`200`, ou `404` se inexistente) |
-| GET | `/jogadores` | Lista todos os jogadores |
-| GET | `/jogadores/{id}` | Busca um jogador pelo ID |
-| GET | `/jogadores/ativos` | Lista jogadores ativos |
-| GET | `/jogadores/{id}/desempenho` | Consulta o desempenho |
+## 🛠️ Endpoints da API (Backend)
 
-## Campo clube
+| Método | Endpoint                     | Descrição                                         |
+| :----- | :--------------------------- | :------------------------------------------------ |
+| `POST` | `/jogadores`                 | Cadastra um novo jogador (`201 Created`)          |
+| `PUT`  | `/jogadores/{id}`            | Atualiza um jogador (`200 OK` ou `404 Not Found`) |
+| `GET`  | `/jogadores`                 | Lista todos os jogadores cadastrados              |
+| `GET`  | `/jogadores/{id}`            | Busca os detalhes de um jogador por ID            |
+| `GET`  | `/jogadores/ativos`          | Lista apenas os jogadores ativos                  |
+| `GET`  | `/jogadores/{id}/desempenho` | Consulta a análise de desempenho do jogador       |
 
-Para atualizar uma tabela existente, execute `sql/adicionar_clube.sql` no banco
-configurado na aplicação. O script preserva os registros existentes.
+### Estrutura do JSON (Cadastro / Edição)
 
-Cadastro e edição recebem JSON com `nome`, `posicao`, `clube`, `idade`,
-`quantidadeGols`, `quantidadePartidas` e `ativo`. Valores numéricos negativos,
-nomes/posições vazios e textos acima dos limites da tabela retornam `400`.
+```json
+{
+  "nome": "Neymar Jr",
+  "posicao": "Atacante",
+  "clube": "Santos",
+  "idade": 32,
+  "quantidadeGols": 400,
+  "quantidadePartidas": 600,
+  "ativo": true
+}
+```
 
-## Como executar
+---
 
-No terminal, dentro da pasta do projeto:
+## 💻 Como Executar a Aplicação
+
+### 1. Pré-requisitos
+
+- **JDK 17+** instalado;
+- **Node.js 18+** instalado;
+- **PostgreSQL** em execução com o banco configurado conforme o `application.properties`.
+
+---
+
+### 2. Executando o Backend (Java / Spring Boot)
+
+No terminal, a partir da raiz do projeto:
 
 ```bash
 mvn spring-boot:run
 ```
 
-A aplicação ficará disponível em:
+> O servidor Backend estará rodando em: `http://localhost:8080`
 
-```text
-http://localhost:8080
+---
+
+### 3. Executando o Frontend (Vue.js / Vite)
+
+Em um novo terminal, navegue até a pasta do frontend, instale as dependências e inicie o servidor de desenvolvimento:
+
+```bash
+cd frontend_api_jogadores
+npm install
+npm run dev
 ```
 
-## Testes
+> O aplicativo Frontend estará acessível no endereço indicado pelo terminal (geralmente `http://localhost:5173`).
 
-Exemplos para testar no Postman:
+---
 
-```text
-GET http://localhost:8080/jogadores
-GET http://localhost:8080/jogadores/1
-GET http://localhost:8080/jogadores/ativos
-GET http://localhost:8080/jogadores/1/desempenho
-```
+## 👨‍💻 Autor
 
-Para testar o retorno `404`:
-
-```text
-GET http://localhost:8080/jogadores/999
-```
-
-## Autor
-
-Desenvolvido por Davi Silva Soares.
+Desenvolvido por **Davi Silva Soares**.
