@@ -1,4 +1,4 @@
-# ⚽ Aplicação de Gestão e API de Jogadores
+# Aplicação de Gestão e API de Jogadores
 
 Aplicação Fullstack para cadastro, consulta e análise de desempenho de jogadores de futebol, desenvolvida com **Java (Spring Boot)** no Backend e **Vue.js (Vite)** no Frontend.
 
