@@ -1,20 +1,22 @@
-# IDE - IntelliJ IDEA
+# Sistema operacional (macOS)
+.DS_Store
+**/.DS_Store
+
+# IDEs
 .idea/
-*.iws
+.vscode/
 *.iml
 *.ipr
+*.iws
 out/
 
-# Compilação e Build (Maven)
+# Backend (Java / Spring)
 target/
-
-# Configurações de Ambiente Local (Credenciais Sensíveis)
 application-local.properties
 application-dev.properties
-application-prod.properties
-.env
-.ai/
 
-# Logs e Ficheiros Temporários
+# Frontend (Node / Vue / Vite)
+**/node_modules/
+**/dist/
+**/.vite/
 *.log
-*.tmp
