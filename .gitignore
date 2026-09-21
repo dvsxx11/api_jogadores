@@ -1,2 +1,7 @@
+# IDE - IntelliJ IDEA
 .idea/
-.gitignore/
+*.iws
+*.iml
+*.ipr
+out/
+
