@@ -8,7 +8,8 @@ public class Jogador {
     private int idade;
     private int quantidadeGols;
     private int quantidadePartidas;
-    private boolean ativo;
+    private boolean ativo = true;
+    private String clube;
 
     public Jogador() {
     }
@@ -78,5 +79,13 @@ public class Jogador {
 
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
+    }
+
+    public String getClube() {
+        return clube;
+    }
+
+    public void setClube(String clube) {
+        this.clube = clube;
     }
 }

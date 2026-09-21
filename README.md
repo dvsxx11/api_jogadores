@@ -2,10 +2,11 @@
 
 API REST simples para consulta de jogadores de futebol, desenvolvida com Java, Spring Boot, Maven e Spring Web.
 
-Os jogadores são armazenados em memória utilizando uma `List`, sem banco de dados.
+Os jogadores são armazenados no PostgreSQL usando Spring JDBC.
 
 ## Funcionalidades
 
+- Cadastrar e editar jogadores, incluindo clube;
 - Listar todos os jogadores;
 - buscar jogador pelo ID;
 - listar jogadores ativos;
@@ -44,10 +45,21 @@ service
 
 | Método | Endpoint | Descrição |
 |---|---|---|
+| POST | `/jogadores` | Cadastra um jogador (`201`) |
+| PUT | `/jogadores/{id}` | Atualiza um jogador (`200`, ou `404` se inexistente) |
 | GET | `/jogadores` | Lista todos os jogadores |
 | GET | `/jogadores/{id}` | Busca um jogador pelo ID |
 | GET | `/jogadores/ativos` | Lista jogadores ativos |
 | GET | `/jogadores/{id}/desempenho` | Consulta o desempenho |
+
+## Campo clube
+
+Para atualizar uma tabela existente, execute `sql/adicionar_clube.sql` no banco
+configurado na aplicação. O script preserva os registros existentes.
+
+Cadastro e edição recebem JSON com `nome`, `posicao`, `clube`, `idade`,
+`quantidadeGols`, `quantidadePartidas` e `ativo`. Valores numéricos negativos,
+nomes/posições vazios e textos acima dos limites da tabela retornam `400`.
 
 ## Como executar
 
