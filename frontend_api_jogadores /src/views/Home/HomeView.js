@@ -6,14 +6,37 @@ export default {
   setup() {
     const jogadores = ref([]);
     const mensagemErro = ref("");
-    const totalClubes = computed(
-      () =>
-        new Set(
-          jogadores.value
-            .map((jogador) => jogador.clube?.trim().toLocaleLowerCase())
-            .filter(Boolean),
-        ).size,
+    const filtroStatus = ref("todos");
+    const clubeSelecionado = ref("");
+    const clubes = computed(() => {
+      const nomes = new Map();
+      jogadores.value.forEach((jogador) => {
+        const nome = jogador.clube?.trim();
+        if (nome) nomes.set(nome.toLocaleLowerCase(), nome);
+      });
+      return [...nomes.entries()]
+        .sort((a, b) => a[1].localeCompare(b[1], "pt-BR"))
+        .map(([valor, nome]) => ({ valor, nome }));
+    });
+    const jogadoresAtivos = computed(() =>
+      jogadores.value.filter((jogador) => jogador.ativo),
     );
+    const jogadoresInativos = computed(() =>
+      jogadores.value.filter((jogador) => !jogador.ativo),
+    );
+    const jogadoresFiltrados = computed(() => {
+      if (filtroStatus.value === "ativos") return jogadoresAtivos.value;
+      if (filtroStatus.value === "inativos") return jogadoresInativos.value;
+      if (filtroStatus.value === "clubes") {
+        return jogadores.value.filter(
+          (jogador) =>
+            jogador.clube?.trim().toLocaleLowerCase() ===
+            clubeSelecionado.value,
+        );
+      }
+      return jogadores.value;
+    });
+    const totalClubes = computed(() => clubes.value.length);
 
     const carregarJogadores = async () => {
       try {
@@ -42,6 +65,12 @@ export default {
 
     return {
       jogadores,
+      filtroStatus,
+      clubeSelecionado,
+      clubes,
+      jogadoresAtivos,
+      jogadoresInativos,
+      jogadoresFiltrados,
       totalClubes,
       mensagemErro,
       apagarJogador,

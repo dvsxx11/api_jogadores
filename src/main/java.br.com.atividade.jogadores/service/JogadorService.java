@@ -81,6 +81,14 @@ public class JogadorService {
             );
         }
 
+        if (jogador.getNumeroCamisa() != null
+                && (jogador.getNumeroCamisa() < 1 || jogador.getNumeroCamisa() > 99)) {
+            throw new ResponseStatusException(
+                    HttpStatus.BAD_REQUEST,
+                    "Número da camisa deve estar entre 1 e 99."
+            );
+        }
+
         if (jogador.getIdade() < 0
                 || jogador.getQuantidadeGols() < 0
                 || jogador.getQuantidadePartidas() < 0) {

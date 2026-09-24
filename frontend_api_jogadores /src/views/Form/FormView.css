@@ -17,6 +17,69 @@
 .form-card {
   padding: 32px 36px;
 }
+.player-form {
+  margin-bottom: 18px;
+}
+.player-form-head {
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #edf1ec;
+  padding-bottom: 23px;
+  margin-bottom: 27px;
+}
+.player-form-label {
+  color: #4d8558;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+.player-form-head h2 {
+  font:
+    700 23px "Outfit",
+    sans-serif;
+  color: #1e3c2b;
+  margin: 5px 0 0;
+}
+.remove-player {
+  border: 0;
+  background: #fff1ee;
+  color: #bb5445;
+  border-radius: 9px;
+  padding: 9px 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+.remove-player:hover {
+  background: #ffe1da;
+}
+.add-player {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 24px;
+  border: 1px dashed #9bc79b;
+  border-radius: 12px;
+  background: #f8fcf6;
+  color: #34764b;
+  font-size: 13px;
+  font-weight: 800;
+}
+.add-player:hover {
+  background: #edf7e9;
+}
+.form-error {
+  color: #ad473e;
+  background: #fff1ee;
+  border-radius: 9px;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+button:disabled {
+  opacity: 0.65;
+  cursor: wait;
+}
 .form-section-title {
   display: flex;
   align-items: center;
@@ -41,7 +104,7 @@
     700 13px "Outfit",
     sans-serif;
 }
-.form-section-title h2 {
+.form-section-title h3 {
   font:
     700 18px "Outfit",
     sans-serif;

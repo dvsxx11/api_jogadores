@@ -18,8 +18,7 @@
     </div>
     <div class="stat-card">
       <span class="stat-icon green">●</span><span>Jogadores ativos</span
-      ><strong>{{ jogadores.filter(j => j.ativo).length }}</strong
-      ><small>No cadastro</small>
+      ><strong>{{ jogadoresAtivos.length }}</strong><small>No cadastro</small>
     </div>
     <div class="stat-card">
       <span class="stat-icon lime">◆</span><span>Clubes representados</span
@@ -36,6 +35,58 @@
       <span class="count-pill">{{ jogadores.length }} cadastrados</span>
     </div>
 
+    <div
+      v-if="!mensagemErro && jogadores.length"
+      class="status-tabs"
+      aria-label="Filtrar jogadores"
+    >
+      <button
+        type="button"
+        :class="['status-tab', { selected: filtroStatus === 'todos' }]"
+        :aria-pressed="filtroStatus === 'todos'"
+        @click="filtroStatus = 'todos'"
+      >
+        Todos <span>{{ jogadores.length }}</span>
+      </button>
+      <button
+        type="button"
+        :class="['status-tab', { selected: filtroStatus === 'ativos' }]"
+        :aria-pressed="filtroStatus === 'ativos'"
+        @click="filtroStatus = 'ativos'"
+      >
+        Ativos <span>{{ jogadoresAtivos.length }}</span>
+      </button>
+      <button
+        type="button"
+        :class="['status-tab', { selected: filtroStatus === 'inativos' }]"
+        :aria-pressed="filtroStatus === 'inativos'"
+        @click="filtroStatus = 'inativos'"
+      >
+        Inativos <span>{{ jogadoresInativos.length }}</span>
+      </button>
+      <button
+        type="button"
+        :class="['status-tab', { selected: filtroStatus === 'clubes' }]"
+        :aria-pressed="filtroStatus === 'clubes'"
+        @click="filtroStatus = 'clubes'"
+      >
+        Por clube <span>{{ totalClubes }}</span>
+      </button>
+    </div>
+
+    <div
+      v-if="filtroStatus === 'clubes' && !mensagemErro && jogadores.length"
+      class="club-filter"
+    >
+      <label for="filtro-clube">Escolha um clube</label>
+      <select id="filtro-clube" v-model="clubeSelecionado">
+        <option value="">Selecione um clube</option>
+        <option v-for="clube in clubes" :key="clube.valor" :value="clube.valor">
+          {{ clube.nome }}
+        </option>
+      </select>
+    </div>
+
     <div v-if="mensagemErro" class="empty-state">
       <span class="empty-icon">!</span>
       <h3>Não foi possível carregar os jogadores</h3>
@@ -50,11 +101,30 @@
       >
     </div>
 
+    <div
+      v-else-if="filtroStatus === 'clubes' && !clubeSelecionado"
+      class="empty-state"
+    >
+      <span class="empty-icon">◆</span>
+      <h3>Escolha um clube</h3>
+      <p>Selecione um clube acima para ver seus jogadores.</p>
+    </div>
+
+    <div v-else-if="jogadoresFiltrados.length === 0" class="empty-state">
+      <span class="empty-icon">⚽</span>
+      <h3>
+        Nenhum jogador {{ filtroStatus === 'ativos' ? 'ativo' : filtroStatus ===
+        'inativos' ? 'inativo' : 'neste clube' }}
+      </h3>
+      <p>Selecione outra aba para ver os jogadores cadastrados.</p>
+    </div>
+
     <div v-else class="tabela-container">
       <table class="tabela">
         <thead>
           <tr>
             <th>Jogador</th>
+            <th>Camisa</th>
             <th>Posição</th>
             <th>Clube</th>
             <th>Idade</th>
@@ -65,16 +135,21 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="jogador in jogadores" :key="jogador.id">
+          <tr v-for="jogador in jogadoresFiltrados" :key="jogador.id">
             <td>
               <div class="player-cell">
                 <span class="avatar"
                   >{{ jogador.nome?.charAt(0)?.toUpperCase() || '?' }}</span
                 ><span
                   ><strong>{{ jogador.nome }}</strong
-                  ><small>#{{ jogador.id }}</small></span
+                  ><small>ID #{{ jogador.id }}</small></span
                 >
               </div>
+            </td>
+            <td>
+              <span class="shirt-number"
+                >{{ jogador.numeroCamisa ?? '—' }}</span
+              >
             </td>
             <td>{{ jogador.posicao }}</td>
             <td>{{ jogador.clube || '—' }}</td>

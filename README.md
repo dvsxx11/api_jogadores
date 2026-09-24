@@ -26,7 +26,7 @@ Os dados dos jogadores são armazenados no banco de dados **PostgreSQL** atravé
 
 ## 📌 Funcionalidades
 
-- **Gerenciamento Completo:** Cadastrar e editar jogadores (incluindo nome, posição, clube, idade, partidas, gols e status);
+- **Gerenciamento Completo:** Cadastrar e editar jogadores (incluindo nome, posição, clube, número da camisa, idade, partidas, gols e status);
 - **Interface Visual:** Interface web reativa em Vue.js para navegação e preenchimento de formulários;
 - **Consultas de Dados:** Listagem de todos os jogadores e filtragem de jogadores ativos;
 - **Análise de Desempenho:** Cálculo automático de médias de gols e status do jogador;
@@ -70,7 +70,7 @@ api_jogadores/
 │       └── resources/               # Configurações (application.properties)
 │
 ├── sql/                             # Scripts de banco de dados
-│   └── adicionar_clube.sql
+│   └── adicionar_numero_camisa.sql
 │
 ├── .gitignore
 └── pom.xml                          # Dependências Maven do Backend
@@ -96,6 +96,7 @@ api_jogadores/
   "nome": "Neymar Jr",
   "posicao": "Atacante",
   "clube": "Santos",
+  "numeroCamisa": 10,
   "idade": 32,
   "quantidadeGols": 400,
   "quantidadePartidas": 600,
@@ -112,6 +113,8 @@ api_jogadores/
 - **JDK 17+** instalado;
 - **Node.js 18+** instalado;
 - **PostgreSQL** em execução com o banco configurado conforme o `application.properties`.
+
+Antes de iniciar o backend em um banco existente, execute `sql/adicionar_numero_camisa.sql` no PostgreSQL. O número da camisa é opcional e, quando informado, deve estar entre 1 e 99.
 
 ---
 

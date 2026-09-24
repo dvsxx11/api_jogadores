@@ -25,6 +25,7 @@ public class JogadorRepository {
         );
 
         jogador.setClube(rs.getString("clube"));
+        jogador.setNumeroCamisa(rs.getObject("numero_camisa", Integer.class));
 
         return jogador;
     };
@@ -63,12 +64,13 @@ public class JogadorRepository {
                         nome,
                         posicao,
                         clube,
+                        numero_camisa,
                         idade,
                         quantidade_gols,
                         quantidade_partidas,
                         ativo
                     )
-                VALUES (?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 RETURNING *
                 """;
 
@@ -78,6 +80,7 @@ public class JogadorRepository {
                 jogador.getNome(),
                 jogador.getPosicao(),
                 jogador.getClube(),
+                jogador.getNumeroCamisa(),
                 jogador.getIdade(),
                 jogador.getQuantidadeGols(),
                 jogador.getQuantidadePartidas(),
@@ -92,6 +95,7 @@ public class JogadorRepository {
                     nome = ?,
                     posicao = ?,
                     clube = ?,
+                    numero_camisa = ?,
                     idade = ?,
                     quantidade_gols = ?,
                     quantidade_partidas = ?,
@@ -106,6 +110,7 @@ public class JogadorRepository {
                 jogador.getNome(),
                 jogador.getPosicao(),
                 jogador.getClube(),
+                jogador.getNumeroCamisa(),
                 jogador.getIdade(),
                 jogador.getQuantidadeGols(),
                 jogador.getQuantidadePartidas(),

@@ -3,111 +3,167 @@
   <div class="form-heading">
     <span class="eyebrow">Cadastro de jogadores</span>
     <h1 class="page-title">
-      {{ idEdicao ? 'Editar jogador' : 'Novo jogador' }}
+      {{ idEdicao ? 'Editar jogador' : 'Adicionar jogadores' }}
     </h1>
     <p v-if="idEdicao" class="page-subtitle">
       Atualize as informações deste atleta.
     </p>
     <p v-else class="page-subtitle">
-      Preencha os dados para adicionar um jogador ao cadastro.
+      Preencha os dados de um ou mais jogadores antes de salvar.
     </p>
   </div>
 
-  <form class="surface form-card" @submit.prevent="salvarJogador">
-    <div class="form-section-title">
-      <span>01</span>
-      <div>
-        <h2>Informações do jogador</h2>
-        <p>Dados básicos para identificar o atleta.</p>
-      </div>
-    </div>
-    <div class="campo">
-      <label for="nome">Nome completo</label>
-      <input
-        id="nome"
-        type="text"
-        v-model="jogador.nome"
-        placeholder="Ex.: João Silva"
-        required
-      />
-    </div>
-
-    <div class="campo-grupo two-columns">
-      <div class="campo">
-        <label for="posicao">Posição</label
-        ><input
-          id="posicao"
-          type="text"
-          v-model="jogador.posicao"
-          placeholder="Ex.: Atacante"
-          required
-        />
-      </div>
-      <div class="campo">
-        <label for="clube">Clube</label
-        ><input
-          id="clube"
-          type="text"
-          v-model="jogador.clube"
-          placeholder="Ex.: Clube Atlético"
-        />
-      </div>
-    </div>
-
-    <div class="form-section-title second">
-      <span>02</span>
-      <div>
-        <h2>Estatísticas</h2>
-        <p>Números e disponibilidade do jogador.</p>
-      </div>
-    </div>
-    <div class="campo-grupo">
-      <div class="campo">
-        <label for="idade">Idade</label>
-        <input
-          id="idade"
-          type="number"
-          v-model.number="jogador.idade"
-          min="0"
-          placeholder="Ex.: 24"
-          required
-        />
-      </div>
-
-      <div class="campo">
-        <label for="gols">Gols</label>
-        <input
-          id="gols"
-          type="number"
-          v-model.number="jogador.quantidadeGols"
-          min="0"
-        />
-      </div>
-
-      <div class="campo">
-        <label for="partidas">Partidas</label>
-        <input
-          id="partidas"
-          type="number"
-          v-model.number="jogador.quantidadePartidas"
-          min="0"
-        />
-      </div>
-    </div>
-
-    <div class="campo-checkbox">
-      <label>
-        <input type="checkbox" v-model="jogador.ativo" />
-        <span
-          ><strong>Jogador ativo</strong
-          ><small>Disponível para o elenco principal</small></span
+  <form @submit.prevent="salvarJogadores">
+    <section
+      v-for="(jogador, indice) in jogadoresFormulario"
+      :key="jogador.chave"
+      class="surface form-card player-form"
+    >
+      <div class="player-form-head">
+        <div>
+          <span class="player-form-label"
+            >{{ idEdicao ? 'Cadastro' : `Jogador ${indice + 1}` }}</span
+          >
+          <h2>{{ jogador.nome || 'Novo jogador' }}</h2>
+        </div>
+        <button
+          v-if="!idEdicao && jogadoresFormulario.length > 1"
+          type="button"
+          class="remove-player"
+          :disabled="salvando"
+          @click="removerJogador(jogador.chave)"
         >
-      </label>
-    </div>
+          Remover
+        </button>
+      </div>
 
+      <div class="form-section-title">
+        <span>01</span>
+        <div>
+          <h3>Informações do jogador</h3>
+          <p>Dados básicos para identificar o atleta.</p>
+        </div>
+      </div>
+      <div class="campo">
+        <label :for="`nome-${jogador.chave}`">Nome completo</label
+        ><input
+          :id="`nome-${jogador.chave}`"
+          type="text"
+          v-model="jogador.nome"
+          placeholder="Ex.: Davi Silva Soares"
+          required
+          :disabled="salvando"
+        />
+      </div>
+      <div class="campo-grupo two-columns">
+        <div class="campo">
+          <label :for="`posicao-${jogador.chave}`">Posição</label
+          ><input
+            :id="`posicao-${jogador.chave}`"
+            type="text"
+            v-model="jogador.posicao"
+            placeholder="Ex.: Atacante"
+            required
+            :disabled="salvando"
+          />
+        </div>
+        <div class="campo">
+          <label :for="`clube-${jogador.chave}`">Clube</label
+          ><input
+            :id="`clube-${jogador.chave}`"
+            type="text"
+            v-model="jogador.clube"
+            placeholder="Ex.: Corinthians"
+            :disabled="salvando"
+          />
+        </div>
+      </div>
+      <div class="campo">
+        <label :for="`numeroCamisa-${jogador.chave}`">Número da camisa</label
+        ><input
+          :id="`numeroCamisa-${jogador.chave}`"
+          type="number"
+          v-model.number="jogador.numeroCamisa"
+          min="1"
+          max="99"
+          placeholder="Ex.: 10"
+          :disabled="salvando"
+        />
+      </div>
+
+      <div class="form-section-title second">
+        <span>02</span>
+        <div>
+          <h3>Estatísticas</h3>
+          <p>Números e disponibilidade do jogador.</p>
+        </div>
+      </div>
+      <div class="campo-grupo">
+        <div class="campo">
+          <label :for="`idade-${jogador.chave}`">Idade</label
+          ><input
+            :id="`idade-${jogador.chave}`"
+            type="number"
+            v-model.number="jogador.idade"
+            min="0"
+            placeholder="Ex.: 19"
+            required
+            :disabled="salvando"
+          />
+        </div>
+        <div class="campo">
+          <label :for="`gols-${jogador.chave}`">Gols</label
+          ><input
+            :id="`gols-${jogador.chave}`"
+            type="number"
+            v-model.number="jogador.quantidadeGols"
+            min="0"
+            :disabled="salvando"
+          />
+        </div>
+        <div class="campo">
+          <label :for="`partidas-${jogador.chave}`">Partidas</label
+          ><input
+            :id="`partidas-${jogador.chave}`"
+            type="number"
+            v-model.number="jogador.quantidadePartidas"
+            min="0"
+            :disabled="salvando"
+          />
+        </div>
+      </div>
+      <div class="campo-checkbox">
+        <label
+          ><input
+            type="checkbox"
+            v-model="jogador.ativo"
+            :disabled="salvando"
+          /><span
+            ><strong>Jogador ativo</strong
+            ><small>Disponível para o elenco principal</small></span
+          ></label
+        >
+      </div>
+    </section>
+
+    <button
+      v-if="!idEdicao"
+      type="button"
+      class="add-player"
+      :disabled="salvando"
+      @click="adicionarJogador"
+    >
+      + Adicionar outro jogador
+    </button>
+    <p v-if="erroSalvar" class="form-error" role="alert">{{ erroSalvar }}</p>
     <div class="acoes">
-      <button type="submit" class="btn btn-primary">
-        {{ idEdicao ? 'Salvar alterações' : 'Cadastrar jogador' }}
+      <button type="submit" class="btn btn-primary" :disabled="salvando">
+        <template v-if="salvando">Salvando...</template>
+        <template v-else-if="idEdicao">Salvar alterações</template>
+        <template v-else-if="jogadoresFormulario.length > 1"
+          >Cadastrar {{ jogadoresFormulario.length }} jogadores</template
+        >
+        <template v-else>Cadastrar jogador</template>
       </button>
       <RouterLink to="/" class="btn btn-secondary">Cancelar</RouterLink>
     </div>

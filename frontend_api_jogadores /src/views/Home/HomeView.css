@@ -59,6 +59,75 @@
 .roster-section {
   overflow: hidden;
 }
+.status-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 13px 24px;
+  border-bottom: 1px solid #edf1ec;
+  overflow-x: auto;
+}
+.status-tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  border: 0;
+  border-radius: 9px;
+  background: transparent;
+  color: #728176;
+  padding: 9px 13px;
+  font-size: 13px;
+  font-weight: 700;
+}
+.status-tab:hover {
+  background: #f2f7ef;
+  color: #24583b;
+}
+.status-tab.selected {
+  background: #e9f4e5;
+  color: #24583b;
+}
+.status-tab span {
+  font-size: 11px;
+  background: #e9eee8;
+  border-radius: 20px;
+  padding: 2px 7px;
+}
+.status-tab.selected span {
+  background: #d4e9ce;
+}
+.status-tab:focus-visible {
+  outline: 2px solid #399354;
+  outline-offset: 2px;
+}
+.club-filter {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 24px;
+  border-bottom: 1px solid #edf1ec;
+  background: #fbfdfa;
+}
+.club-filter label {
+  color: #34503c;
+  font-size: 13px;
+  font-weight: 700;
+}
+.club-filter select {
+  min-width: 220px;
+  max-width: 100%;
+  padding: 10px 34px 10px 12px;
+  border: 1px solid #dce6da;
+  border-radius: 9px;
+  background: #fff;
+  color: #244230;
+  font: inherit;
+  font-size: 13px;
+}
+.club-filter select:focus-visible {
+  outline: 2px solid #399354;
+  outline-offset: 2px;
+}
 .section-head {
   padding: 26px 28px;
   display: flex;

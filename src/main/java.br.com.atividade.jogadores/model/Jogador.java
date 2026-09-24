@@ -10,6 +10,7 @@ public class Jogador {
     private int quantidadePartidas;
     private boolean ativo = true;
     private String clube;
+    private Integer numeroCamisa;
 
     public Jogador() {
     }
@@ -87,5 +88,13 @@ public class Jogador {
 
     public void setClube(String clube) {
         this.clube = clube;
+    }
+
+    public Integer getNumeroCamisa() {
+        return numeroCamisa;
+    }
+
+    public void setNumeroCamisa(Integer numeroCamisa) {
+        this.numeroCamisa = numeroCamisa;
     }
 }
