@@ -1,72 +1,189 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap");
+:root {
+  font-family: "DM Sans", sans-serif;
+  color: #172820;
+  background: #f4f7f3;
+}
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family:
-    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
-    Cantarell, sans-serif;
 }
-
 body {
-  background-color: #f1f5f9;
-  color: #334155;
+  margin: 0;
 }
-
-.container {
-  max-width: 1000px;
-  margin: 40px auto;
-  padding: 24px;
-  background: white;
-  border-radius: 10px;
-  box-shadow:
-    0 4px 6px -1px rgba(0, 0, 0, 0.07),
-    0 2px 4px -2px rgba(0, 0, 0, 0.05);
+button,
+input {
+  font: inherit;
 }
-
-.btn {
-  padding: 8px 14px;
-  border: none;
-  border-radius: 6px;
+button {
   cursor: pointer;
-  font-weight: 600;
-  font-size: 13px;
+}
+a {
   text-decoration: none;
+  color: inherit;
+}
+.app-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 95% 0%, #e7f2dc 0, transparent 35%), #f4f7f3;
+}
+.site-header {
+  background: #10291e;
+  color: #fff;
+}
+.nav-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 0 28px;
+  min-height: 78px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font:
+    700 22px "Outfit",
+    sans-serif;
+  letter-spacing: -0.7px;
+}
+.brand em {
+  font-style: normal;
+  font-weight: 400;
+  color: #a9c1ae;
+}
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 39px;
+  height: 39px;
+  border-radius: 11px;
+  background: #c7ef6c;
+  color: #173820;
+  font:
+    800 24px "Outfit",
+    sans-serif;
+}
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+.nav-links a {
+  padding: 10px 15px;
+  border-radius: 9px;
+  color: #b4c8ba;
+  font-size: 14px;
+  font-weight: 700;
+}
+.nav-links a:hover,
+.nav-links a.is-active {
+  background: #234534;
+  color: #fff;
+}
+.nav-links .nav-add {
+  background: #c7ef6c;
+  color: #15321e;
+}
+.nav-links .nav-add:hover {
+  background: #d9fb8a;
+  color: #15321e;
+}
+.page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 52px 28px 80px;
+}
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #4d8558;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.eyebrow:before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #6ebc62;
+}
+.page-title {
+  font:
+    700 clamp(32px, 4vw, 48px)/1.1 "Outfit",
+    sans-serif;
+  letter-spacing: -1.8px;
+  margin: 13px 0 10px;
+  color: #153123;
+}
+.page-subtitle {
+  color: #728176;
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0;
+}
+.btn {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 17px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  transition: all 0.2s ease;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  transition:
+    transform 0.18s,
+    background 0.18s,
+    box-shadow 0.18s;
+  white-space: nowrap;
 }
-
 .btn:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
 }
-
-.btn:active {
-  transform: translateY(0);
-}
-
 .btn-primary {
-  background: #10b981;
-  color: white;
+  background: #173f2a;
+  color: #fff;
+  box-shadow: 0 5px 12px #173f2a1c;
 }
 .btn-primary:hover {
-  background: #059669;
+  background: #245c3c;
 }
-
 .btn-danger {
-  background: #ef4444;
-  color: white;
+  background: #fff1ee;
+  color: #bb5445;
 }
-.btn-danger:hover {
-  background: #dc2626;
-}
-
 .btn-secondary {
-  background: #64748b;
-  color: white;
+  background: #eef3ed;
+  color: #365442;
 }
-.btn-secondary:hover {
-  background: #475569;
+.surface {
+  background: #fff;
+  border: 1px solid #e5ece4;
+  border-radius: 18px;
+  box-shadow: 0 12px 35px #183b2110;
+}
+@media (max-width: 640px) {
+  .nav-inner {
+    padding: 0 18px;
+    min-height: 68px;
+  }
+  .brand {
+    font-size: 18px;
+  }
+  .nav-links a {
+    font-size: 12px;
+    padding: 9px;
+  }
+  .nav-links a:first-child {
+    display: none;
+  }
+  .page {
+    padding: 34px 16px 60px;
+  }
 }

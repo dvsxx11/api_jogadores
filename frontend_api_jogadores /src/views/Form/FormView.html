@@ -1,37 +1,93 @@
-<div class="container">
-  <h1>{{ idEdicao ? 'Editar Jogador' : 'Novo Jogador' }}</h1>
-  <hr style="margin: 15px 0" />
+<div class="page form-page">
+  <RouterLink to="/" class="back-link">← Voltar para os jogadores</RouterLink>
+  <div class="form-heading">
+    <span class="eyebrow">Cadastro de jogadores</span>
+    <h1 class="page-title">
+      {{ idEdicao ? 'Editar jogador' : 'Novo jogador' }}
+    </h1>
+    <p v-if="idEdicao" class="page-subtitle">
+      Atualize as informações deste atleta.
+    </p>
+    <p v-else class="page-subtitle">
+      Preencha os dados para adicionar um jogador ao cadastro.
+    </p>
+  </div>
 
-  <form @submit.prevent="salvarJogador">
+  <form class="surface form-card" @submit.prevent="salvarJogador">
+    <div class="form-section-title">
+      <span>01</span>
+      <div>
+        <h2>Informações do jogador</h2>
+        <p>Dados básicos para identificar o atleta.</p>
+      </div>
+    </div>
     <div class="campo">
-      <label>Nome:</label>
-      <input type="text" v-model="jogador.nome" required />
+      <label for="nome">Nome completo</label>
+      <input
+        id="nome"
+        type="text"
+        v-model="jogador.nome"
+        placeholder="Ex.: João Silva"
+        required
+      />
     </div>
 
-    <div class="campo">
-      <label>Posição:</label>
-      <input type="text" v-model="jogador.posicao" required />
+    <div class="campo-grupo two-columns">
+      <div class="campo">
+        <label for="posicao">Posição</label
+        ><input
+          id="posicao"
+          type="text"
+          v-model="jogador.posicao"
+          placeholder="Ex.: Atacante"
+          required
+        />
+      </div>
+      <div class="campo">
+        <label for="clube">Clube</label
+        ><input
+          id="clube"
+          type="text"
+          v-model="jogador.clube"
+          placeholder="Ex.: Clube Atlético"
+        />
+      </div>
     </div>
 
-    <div class="campo">
-      <label>Clube:</label>
-      <input type="text" v-model="jogador.clube" />
+    <div class="form-section-title second">
+      <span>02</span>
+      <div>
+        <h2>Estatísticas</h2>
+        <p>Números e disponibilidade do jogador.</p>
+      </div>
     </div>
-
     <div class="campo-grupo">
       <div class="campo">
-        <label>Idade:</label>
-        <input type="number" v-model.number="jogador.idade" min="0" required />
-      </div>
-
-      <div class="campo">
-        <label>Gols:</label>
-        <input type="number" v-model.number="jogador.quantidadeGols" min="0" />
-      </div>
-
-      <div class="campo">
-        <label>Partidas:</label>
+        <label for="idade">Idade</label>
         <input
+          id="idade"
+          type="number"
+          v-model.number="jogador.idade"
+          min="0"
+          placeholder="Ex.: 24"
+          required
+        />
+      </div>
+
+      <div class="campo">
+        <label for="gols">Gols</label>
+        <input
+          id="gols"
+          type="number"
+          v-model.number="jogador.quantidadeGols"
+          min="0"
+        />
+      </div>
+
+      <div class="campo">
+        <label for="partidas">Partidas</label>
+        <input
+          id="partidas"
           type="number"
           v-model.number="jogador.quantidadePartidas"
           min="0"
@@ -41,12 +97,18 @@
 
     <div class="campo-checkbox">
       <label>
-        <input type="checkbox" v-model="jogador.ativo" /> Jogador Ativo
+        <input type="checkbox" v-model="jogador.ativo" />
+        <span
+          ><strong>Jogador ativo</strong
+          ><small>Disponível para o elenco principal</small></span
+        >
       </label>
     </div>
 
     <div class="acoes">
-      <button type="submit" class="btn btn-primary">Salvar</button>
+      <button type="submit" class="btn btn-primary">
+        {{ idEdicao ? 'Salvar alterações' : 'Cadastrar jogador' }}
+      </button>
       <RouterLink to="/" class="btn btn-secondary">Cancelar</RouterLink>
     </div>
   </form>

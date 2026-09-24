@@ -1,69 +1,237 @@
+.page-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 24px;
+  margin-bottom: 34px;
+}
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 27px;
+}
+.stat-card {
+  background: #fff;
+  border: 1px solid #e5ece4;
+  border-radius: 16px;
+  padding: 23px 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 8px 22px #183b2108;
+}
+.stat-icon {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: #e9eef5;
+  color: #4c6685;
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+.stat-icon.green {
+  background: #e6f3e9;
+  color: #399354;
+}
+.stat-icon.lime {
+  background: #eff6db;
+  color: #4c8b32;
+}
+.stat-card span:not(.stat-icon) {
+  font-size: 13px;
+  color: #78877c;
+  font-weight: 600;
+}
+.stat-card strong {
+  font:
+    700 34px "Outfit",
+    sans-serif;
+  color: #183527;
+  line-height: 1.2;
+  margin: 5px 0;
+}
+.stat-card small {
+  font-size: 12px;
+  color: #9aa79b;
+}
+.roster-section {
+  overflow: hidden;
+}
+.section-head {
+  padding: 26px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  border-bottom: 1px solid #edf1ec;
+}
+.section-head h2 {
+  font:
+    700 22px "Outfit",
+    sans-serif;
+  letter-spacing: -0.5px;
+  margin: 0 0 4px;
+  color: #183527;
+}
+.section-head p {
+  color: #8a988d;
+  font-size: 13px;
+  margin: 0;
+}
+.count-pill {
+  background: #edf5e8;
+  color: #467444;
+  border-radius: 100px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
 .tabela-container {
   overflow-x: auto;
 }
-
 .tabela {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 15px;
+  min-width: 850px;
 }
-
 .tabela th {
-  background-color: #f8fafc;
-  color: #64748b;
-  font-size: 13px;
-  font-weight: 600;
+  text-align: left;
+  background: #f9fbf8;
+  color: #8a988e;
+  font-size: 11px;
+  letter-spacing: 1px;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  padding: 14px 12px;
-  border-bottom: 2px solid #e2e8f0;
-  text-align: left;
+  padding: 15px 17px;
+  font-weight: 800;
 }
-
 .tabela td {
-  padding: 12px;
-  border-bottom: 1px solid #edf2f7;
-  color: #334155;
-  font-size: 14px;
-  vertical-align: middle;
-  text-align: left;
+  border-top: 1px solid #edf1ec;
+  padding: 16px 17px;
+  font-size: 13px;
+  color: #526357;
 }
-
 .tabela tbody tr:hover {
-  background-color: #f8fafc;
-  transition: background-color 0.15s ease;
+  background: #fbfdfa;
 }
-
+.player-cell {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-width: 150px;
+}
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
+  border-radius: 11px;
+  background: #e5f1e3;
+  color: #386d42;
+  font:
+    700 16px "Outfit",
+    sans-serif;
+}
+.player-cell strong {
+  display: block;
+  color: #233d2c;
+  font-size: 14px;
+}
+.player-cell small {
+  display: block;
+  color: #9bab9d;
+  font-size: 11px;
+  margin-top: 2px;
+}
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 100px;
+  padding: 6px 10px;
+  font-size: 11px;
+  font-weight: 800;
+}
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+.status-ativo {
+  background: #e8f5e8;
+  color: #34814c;
+}
+.status-inativo {
+  background: #f3f3ef;
+  color: #8f968b;
+}
 .acoes-botoes {
   display: flex;
-  gap: 8px;
   align-items: center;
-  white-space: nowrap;
+  gap: 13px;
 }
-
-/* Badges de Status */
-.status-badge {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 50px;
+.action-link {
+  background: none;
+  border: 0;
+  padding: 5px 0;
+  color: #316d49;
   font-size: 12px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
+  font-weight: 800;
 }
-
-.status-ativo {
-  background-color: #e6f7ef;
-  color: #16a34a;
+.action-link:hover {
+  text-decoration: underline;
 }
-
-.status-inativo {
-  background-color: #fef2f2;
-  color: #dc2626;
+.delete-link {
+  color: #bc665c;
 }
-
-.erro {
-  color: #ef4444;
-  font-weight: 500;
-  margin-top: 10px;
+.empty-state {
+  text-align: center;
+  padding: 62px 20px 70px;
+}
+.empty-icon {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 18px;
+  margin: 0 auto 18px;
+  background: #e9f4e4;
+  font-size: 25px;
+  color: #4e8c55;
+}
+.empty-state h3 {
+  font:
+    700 22px "Outfit",
+    sans-serif;
+  color: #244230;
+  margin: 0 0 7px;
+}
+.empty-state p {
+  color: #87988a;
+  font-size: 14px;
+  margin: 0 auto 21px;
+  max-width: 350px;
+}
+@media (max-width: 700px) {
+  .page-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .stat-card {
+    padding: 17px 20px;
+  }
+  .stat-icon {
+    margin-bottom: 8px;
+  }
+  .section-head {
+    padding: 22px 18px;
+  }
 }

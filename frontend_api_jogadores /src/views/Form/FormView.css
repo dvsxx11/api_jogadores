@@ -1,68 +1,148 @@
-.campo {
-  margin-bottom: 16px;
+.form-page {
+  max-width: 900px;
 }
-
+.back-link {
+  display: inline-block;
+  color: #5d7b63;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+.back-link:hover {
+  color: #245c3c;
+}
+.form-heading {
+  margin-bottom: 29px;
+}
+.form-card {
+  padding: 32px 36px;
+}
+.form-section-title {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 25px;
+}
+.form-section-title.second {
+  border-top: 1px solid #edf1ec;
+  padding-top: 29px;
+  margin-top: 9px;
+}
+.form-section-title > span {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 37px;
+  height: 37px;
+  background: #e7f3dc;
+  color: #3e7a40;
+  border-radius: 10px;
+  font:
+    700 13px "Outfit",
+    sans-serif;
+}
+.form-section-title h2 {
+  font:
+    700 18px "Outfit",
+    sans-serif;
+  color: #1e3c2b;
+  margin: 0 0 3px;
+}
+.form-section-title p {
+  font-size: 12px;
+  color: #93a095;
+  margin: 0;
+}
+.campo {
+  margin-bottom: 21px;
+}
 .campo-grupo {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
 }
-
+.campo-grupo.two-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
 label {
   display: block;
-  font-weight: 600;
-  font-size: 14px;
-  color: #334155;
-  margin-bottom: 6px;
+  font-weight: 700;
+  font-size: 13px;
+  color: #34503c;
+  margin-bottom: 8px;
 }
-
 input[type="text"],
 input[type="number"] {
   width: 100%;
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 6px;
+  padding: 12px 14px;
+  border: 1px solid #dce6da;
+  border-radius: 10px;
   font-size: 14px;
-  color: #1e293b;
+  color: #1e3929;
+  background: #fbfdfa;
+  outline: none;
   transition:
     border-color 0.2s,
-    box-shadow 0.2s,
-    background-color 0.2s;
-  background-color: #f8fafc;
+    box-shadow 0.2s;
 }
-
+input::placeholder {
+  color: #a4b1a5;
+}
 input[type="text"]:focus,
 input[type="number"]:focus {
-  background-color: #ffffff;
-  border-color: #10b981;
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+  border-color: #79b97a;
+  box-shadow: 0 0 0 3px #79b97a26;
+  background: #fff;
 }
-
 .campo-checkbox {
-  margin: 18px 0;
-  display: flex;
-  align-items: center;
+  background: #f7faf5;
+  border: 1px solid #e8eee5;
+  border-radius: 11px;
+  padding: 15px 16px;
+  margin: 3px 0 25px;
 }
-
 .campo-checkbox label {
-  cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-  margin-bottom: 0;
+  gap: 12px;
+  margin: 0;
+  cursor: pointer;
 }
-
 .campo-checkbox input {
   width: 18px;
   height: 18px;
-  accent-color: #10b981;
-  cursor: pointer;
+  accent-color: #398e52;
 }
-
+.campo-checkbox strong {
+  display: block;
+  font-size: 13px;
+}
+.campo-checkbox small {
+  display: block;
+  color: #8a998c;
+  font-size: 11px;
+  font-weight: 400;
+  margin-top: 3px;
+}
 .acoes {
-  margin-top: 24px;
+  border-top: 1px solid #edf1ec;
+  padding-top: 24px;
   display: flex;
-  gap: 12px;
+  gap: 10px;
+}
+@media (max-width: 640px) {
+  .form-card {
+    padding: 23px 18px;
+  }
+  .campo-grupo,
+  .campo-grupo.two-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .acoes {
+    flex-wrap: wrap;
+  }
+  .acoes .btn {
+    flex: 1;
+  }
 }

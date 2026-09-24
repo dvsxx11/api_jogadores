@@ -1,4 +1,4 @@
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted } from "vue";
 import api from "../../services/api";
 
 export default {
@@ -6,6 +6,14 @@ export default {
   setup() {
     const jogadores = ref([]);
     const mensagemErro = ref("");
+    const totalClubes = computed(
+      () =>
+        new Set(
+          jogadores.value
+            .map((jogador) => jogador.clube?.trim().toLocaleLowerCase())
+            .filter(Boolean),
+        ).size,
+    );
 
     const carregarJogadores = async () => {
       try {
@@ -34,6 +42,7 @@ export default {
 
     return {
       jogadores,
+      totalClubes,
       mensagemErro,
       apagarJogador,
     };
